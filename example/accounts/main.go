@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/vslovik/api-sdk-example"
+	"github.com/vslovik/form3"
 )
 
 const id = "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"

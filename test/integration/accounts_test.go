@@ -2,7 +2,7 @@ package integration
 
 import (
 	"context"
-	"github.com/vslovik/api-sdk-example"
+	"github.com/vslovik/form3"
 	"testing"
 )
 
