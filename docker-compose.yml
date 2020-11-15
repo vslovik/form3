@@ -2,7 +2,6 @@ version: '3'
 
 services:
   accountapi:
-    name: accountapi
     image: form3tech/interview-accountapi:v1.0.0-4-g63cf8434
     restart: on-failure
     depends_on:
@@ -23,7 +22,6 @@ services:
     ports:
       - 8080:8080
   postgresql:
-    name: postgresql
     image: postgres:9.5-alpine
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
@@ -37,11 +35,10 @@ services:
     volumes:
       - ./scripts/db:/docker-entrypoint-initdb.d/
   form3sdk:
-    name: form3sdk
-    image: golang:1.15.1-alpine
+    image: mroussin/docker-golang-git:latest
     volumes:
       - .:/usr/local/go/src/go/form3
-    working_dir: /usr/local/go/src/go/form3/tests
+    working_dir: /usr/local/go/src/go/form3
     command: sh run.sh
     depends_on:
       - accountapi

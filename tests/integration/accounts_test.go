@@ -2,7 +2,7 @@ package integration
 
 import (
 	"context"
-	"github.com/vslovik/form3"
+	"github.com/vslovik/form3/form3"
 	"testing"
 )
 
