@@ -143,43 +143,41 @@ func createAccountBunch(number int) {
 	}
 }
 
+func getPage(page int, opt *form3.ListOptions) ([]*form3.Account, error) {
+	opt.Page = page
+	accounts, _, _, err := client.Account.List(context.Background(), opt)
+	for _, elem := range accounts {
+		fmt.Printf("Got account %s \n", elem.ID)
+	}
+	if err != nil {
+		fmt.Printf("Account.List returned error: %v\n", err)
+		return nil, err
+	}
+
+	return accounts, nil
+}
+
 // get all pages of results
-func getAllPages(perPage int) []*form3.Account {
+func getAllPages(perPage int) ([]*form3.Account, error) {
 	var allAccounts []*form3.Account
 	opt := &form3.ListOptions{PerPage: perPage}
 	i := 0
 	for {
-		opt.Page = i
-		fmt.Printf("Retrieving Page %v of %v accounts...\n", opt.Page, opt.PerPage)
-		accounts, _, _, err := client.Account.List(context.Background(), opt)
-		for _, elem := range accounts {
-			fmt.Printf("Got account %s \n", elem.ID)
-		}
+		fmt.Printf("Retrieving Page %v of %v accounts...\n", i, opt.PerPage)
+		accounts, err := getPage(i, opt)
 		if err != nil {
-			fmt.Printf("Account.List returned error: %v\n", err)
+			return nil, err
 		}
-
 		if len(accounts) == 0 {
 			fmt.Printf("Account.List returned no accounts\n")
 			break
 		}
 		fmt.Printf("Account.List returned %v accounts\n", len(accounts))
-
-		if err != nil {
-			fmt.Printf("Account.List returned error: %v\n", err)
-		}
 		allAccounts = append(allAccounts, accounts...)
-
 		i += 1
 	}
-
 	fmt.Printf("Account.List retrieved  %v accounts\n", len(allAccounts))
-
-	if len(allAccounts) != 10 {
-		fmt.Printf("Account.List does not retrived all accounts\n")
-	}
-
-	return allAccounts
+	return allAccounts, nil
 }
 
 func deleteAll(accounts []*form3.Account) {
@@ -196,7 +194,7 @@ func main() {
 
 	perPage := 2
 	fmt.Printf("I want to retrive all accounts page by page, %v account per page\n", perPage)
-	allAccounts := getAllPages(perPage)
+	allAccounts, _ := getAllPages(perPage)
 
 	fmt.Printf("I want to retrive all accounts in one request\n")
 	accounts, _, _, err := client.Account.List(context.Background(), nil)
