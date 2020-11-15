@@ -1,9 +1,9 @@
 package main
 
 import (
-	"../../form3"
 	"context"
 	"fmt"
+	"github.com/vslovik/form3"
 )
 
 const id = "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
