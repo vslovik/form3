@@ -1,8 +1,8 @@
 package integration
 
 import (
+	"../../form3"
 	"context"
-	"github.com/vslovik/form3"
 	"testing"
 )
 

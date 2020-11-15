@@ -4,7 +4,7 @@
 
 // Package query implements encoding of structs into URL query parameters.
 //
-// As a simple example:
+// As a simple examples:
 //
 // 	type Options struct {
 // 		Query   string `url:"q"`
@@ -57,7 +57,7 @@ type Encoder interface {
 // The URL parameter name defaults to the struct field name but can be
 // specified in the struct field's tag value.  The "url" key in the struct
 // field's tag value is the key name, followed by an optional comma and
-// options.  For example:
+// options.  For examples:
 //
 // 	// Field is ignored by this package.
 // 	Field int `url:"-"`
@@ -91,7 +91,7 @@ type Encoder interface {
 // the "semicolon" option will encode the value as a semicolon-delimited string.
 // Including the "brackets" option signals that the multiple URL values should
 // have "[]" appended to the value name. "numbered" will append a number to
-// the end of each incidence of the value name, example:
+// the end of each incidence of the value name, examples:
 // name0=value0&name1=value1, etc.
 //
 // Anonymous struct fields are usually encoded as if their inner exported

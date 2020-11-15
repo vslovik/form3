@@ -1,10 +1,11 @@
 # form3 client #
 
+
 form3 is a Go client library for accessing the [Form3 API][].
 
 ## Usage ##
 ```go
-import "github.com/vslovik/api-sdk-example"	
+import "github.com/vslovik/api-form3-examples"	
 ```
 
 Construct a new Form3 client, then use the account service on the client to
@@ -98,3 +99,18 @@ You can run integration tests from the `test` directory. See the integration tes
     $ go test -coverprofile=coverage.out
     $ go tool cover -html=coverage.out
 
+#### To run integration tests
+
+    $ cd tests 
+    $ go test -v -tags=integration ./integration
+    
+#### To run Form3 SDK usage examples
+
+    $ cd examples/accounts
+    $ go run main.go
+
+## Author
+
+Valeriya Slovikovskaya, vslovik@gmail.com
+
+Quite new to GoLang
