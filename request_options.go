@@ -1,7 +1,6 @@
 package form3
 
 import (
-	"./query"
 	"net/url"
 	"reflect"
 )
@@ -29,7 +28,7 @@ func addOptions(s string, opts interface{}) (string, error) {
 		return s, err
 	}
 
-	qs, err := query.Values(opts)
+	qs, err := Values(opts)
 	if err != nil {
 		return s, err
 	}

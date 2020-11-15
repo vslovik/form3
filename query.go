@@ -18,7 +18,7 @@
 //
 // The exact mapping between Go values and url.Values is described in the
 // documentation for the Values() function.
-package query
+package form3
 
 import (
 	"bytes"
