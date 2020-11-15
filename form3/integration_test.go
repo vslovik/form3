@@ -3,13 +3,12 @@ package form3
 import (
 	"context"
 	"fmt"
-	"github.com/vslovik/form3/form3"
 	"os/exec"
 	"strings"
 	"testing"
 )
 
-var client = form3.NewClient(nil)
+var client = NewClient(nil)
 
 func uuid() (string, error) {
 	cmd := exec.Command("uuidgen")
@@ -28,7 +27,7 @@ func createAccount(t *testing.T, id string, check bool) {
 	}
 	operationId := strings.TrimSuffix(string(uid), "\n")
 
-	attr := &form3.AccountCreateRequestAttributes{
+	attr := &AccountCreateRequestAttributes{
 		BankID:                "400300",
 		BankIDCode:            "GBDSC",
 		BaseCurrency:          "GBP",
@@ -125,7 +124,7 @@ func createAccountBunch(t *testing.T, number int) {
 	}
 }
 
-func getPage(t *testing.T, page int, opt *form3.ListOptions) []*form3.Account {
+func getPage(t *testing.T, page int, opt *ListOptions) []*Account {
 	opt.Page = page
 	accounts, _, _, err := client.Account.List(context.Background(), opt)
 	for _, elem := range accounts {
@@ -138,9 +137,9 @@ func getPage(t *testing.T, page int, opt *form3.ListOptions) []*form3.Account {
 }
 
 // get all pages of results
-func getAllPages(t *testing.T, perPage int) []*form3.Account {
-	var allAccounts []*form3.Account
-	opt := &form3.ListOptions{PerPage: perPage}
+func getAllPages(t *testing.T, perPage int) []*Account {
+	var allAccounts []*Account
+	opt := &ListOptions{PerPage: perPage}
 	i := 0
 	for {
 		fmt.Printf("Retrieving Page %v of %v accounts...\n", i, opt.PerPage)
@@ -157,7 +156,7 @@ func getAllPages(t *testing.T, perPage int) []*form3.Account {
 	return allAccounts
 }
 
-func deleteAll(t *testing.T, accounts []*form3.Account) {
+func deleteAll(t *testing.T, accounts []*Account) {
 	for i, elem := range accounts {
 		fmt.Printf("%v: Deleting account %s...\n", i+1, elem.ID)
 		deleteAccount(t, elem.ID)
