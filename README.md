@@ -100,9 +100,17 @@ You can run integration tests from the `test` directory. See the integration tes
     $ go tool cover -html=coverage.out
 
 #### To run integration tests
+Make repository public and
 
+    $ go get -t github.com/vslovik/form3/form3
     $ cd tests 
     $ go test -v -tags=integration ./integration
+    
+    or
+    
+    $ sh run.sh
+    
+    
     
 #### To run Form3 SDK usage examples
 
