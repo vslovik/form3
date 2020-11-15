@@ -8,110 +8,25 @@ import (
 	"strings"
 )
 
-const id = "ad27e265-9605-4b4b-a0e5-3003ea9cc4dc"
-
 var client = form3.NewClient(nil)
 
 func uuid() (string, error) {
 	cmd := exec.Command("uuidgen")
 	stdout, err := cmd.Output()
-
 	if err != nil {
 		fmt.Println(err.Error())
 		return "", err
 	}
-
 	return string(stdout), nil
 }
 
-func createAccountBunch(number int) {
-	for i := 0; i < number; i++ {
-		uid, err := uuid()
-		if err != nil {
-			fmt.Printf("uuid generation error\n")
-			return
-		}
-		id := strings.TrimSuffix(string(uid), "\n")
-
-		uid, err = uuid()
-		if err != nil {
-			fmt.Printf("uuid generation error\n")
-			return
-		}
-		operationId := strings.TrimSuffix(string(uid), "\n")
-
-		fmt.Printf("%v: Creating account %v...\n", i, id)
-		attr := &form3.AccountCreateRequestAttributes{
-			BankID:                "400300",
-			BankIDCode:            "GBDSC",
-			BaseCurrency:          "GBP",
-			Bic:                   "NWBKGB22",
-			Country:               "GB",
-			AccountNumber:         "10000004",
-			CustomerID:            "234",
-			Iban:                  "GB28NWBK40030212764204",
-			AccountClassification: "Personal",
-		}
-
-		acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
-		if err != nil {
-			fmt.Printf("Account.Create returned error: %v\n", err)
-			return
-		}
-		if acc == nil {
-			fmt.Printf("Account %v does not exists after creation.\n", id)
-		}
-		fmt.Printf("OK\n")
-		if i == 0 {
-			fmt.Printf("Fetching account %v, checking all properties are correctly set...\n", id)
-			acc, _, _, err := client.Account.Fetch(context.Background(), id)
-			if err != nil {
-				fmt.Printf("Account.Fetch returned error: %v\n", err)
-				return
-			}
-			if acc.Attributes.BankID != "400300" {
-				fmt.Printf("Invalid account BankID: %v\n", acc.Attributes.BankID)
-				return
-			}
-			if acc.Attributes.BankIDCode != "GBDSC" {
-				fmt.Printf("Invalid account BankIDCode: %v\n", acc.Attributes.BankIDCode)
-				return
-			}
-			if acc.Attributes.BaseCurrency != "GBP" {
-				fmt.Printf("Invalid account BaseCurrency: %v\n", acc.Attributes.BaseCurrency)
-				return
-			}
-			if acc.Attributes.Bic != "NWBKGB22" {
-				fmt.Printf("Invalid account Bic: %v\n", acc.Attributes.Bic)
-				return
-			}
-			if acc.Attributes.Country != "GB" {
-				fmt.Printf("Invalid account Country: %v\n", acc.Attributes.Country)
-				return
-			}
-			if acc.Attributes.AccountNumber != "10000004" {
-				fmt.Printf("Invalid account AccountNumber: %v\n", acc.Attributes.AccountNumber)
-				return
-			}
-			if acc.Attributes.CustomerID != "234" {
-				fmt.Printf("Invalid account CustomerID: %v\n", acc.Attributes.CustomerID)
-				return
-			}
-			if acc.Attributes.Iban != "GB28NWBK40030212764204" {
-				fmt.Printf("Invalid account Iban: %v\n", acc.Attributes.Iban)
-				return
-			}
-			if acc.Attributes.AccountClassification != "Personal" {
-				fmt.Printf("Invalid account AccountClassification: %v\n", acc.Attributes.AccountClassification)
-				return
-			}
-			fmt.Printf("OK\n")
-		}
+func createAccount(id string, check bool) {
+	uid, err := uuid()
+	if err != nil {
+		fmt.Printf("uuid generation error\n")
+		return
 	}
-}
-
-func createAccount() {
-	operationId := "eb0bd6f5-c3f5-44b2-b677-acd23cdde73c"
+	operationId := strings.TrimSuffix(string(uid), "\n")
 
 	attr := &form3.AccountCreateRequestAttributes{
 		BankID:                "400300",
@@ -125,65 +40,106 @@ func createAccount() {
 		AccountClassification: "Personal",
 	}
 
-	_, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
+	acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
 	if err != nil {
 		fmt.Printf("Account.Create returned error: %v\n", err)
-	}
-
-	// check again and verify exists
-	acc, _, _, err := client.Account.Fetch(context.Background(), id)
-	if err != nil {
-		fmt.Printf("Account.Fetch returned error: %v\n", err)
+		return
 	}
 	if acc == nil {
 		fmt.Printf("Account %v does not exists after creation.\n", id)
 	}
+	fmt.Printf("OK\n")
+	if check {
+		fmt.Printf("Fetching account %v, checking all properties are correctly set...\n", id)
+		acc, _, _, err := client.Account.Fetch(context.Background(), id)
+		if err != nil {
+			fmt.Printf("Account.Fetch returned error: %v\n", err)
+			return
+		}
+		if acc.OrganisationID != operationId {
+			fmt.Printf("Invalid account OrganisationID: %v\n", acc.OrganisationID)
+			return
+		}
+		if acc.Type != "accounts" {
+			fmt.Printf("Invalid account Type: %v\n", acc.Type)
+			return
+		}
+		if acc.Attributes.BankID != "400300" {
+			fmt.Printf("Invalid account BankID: %v\n", acc.Attributes.BankID)
+			return
+		}
+		if acc.Attributes.BankIDCode != "GBDSC" {
+			fmt.Printf("Invalid account BankIDCode: %v\n", acc.Attributes.BankIDCode)
+			return
+		}
+		if acc.Attributes.BaseCurrency != "GBP" {
+			fmt.Printf("Invalid account BaseCurrency: %v\n", acc.Attributes.BaseCurrency)
+			return
+		}
+		if acc.Attributes.Bic != "NWBKGB22" {
+			fmt.Printf("Invalid account Bic: %v\n", acc.Attributes.Bic)
+			return
+		}
+		if acc.Attributes.Country != "GB" {
+			fmt.Printf("Invalid account Country: %v\n", acc.Attributes.Country)
+			return
+		}
+		if acc.Attributes.AccountNumber != "10000004" {
+			fmt.Printf("Invalid account AccountNumber: %v\n", acc.Attributes.AccountNumber)
+			return
+		}
+		if acc.Attributes.CustomerID != "234" {
+			fmt.Printf("Invalid account CustomerID: %v\n", acc.Attributes.CustomerID)
+			return
+		}
+		if acc.Attributes.Iban != "GB28NWBK40030212764204" {
+			fmt.Printf("Invalid account Iban: %v\n", acc.Attributes.Iban)
+			return
+		}
+		if acc.Attributes.AccountClassification != "Personal" {
+			fmt.Printf("Invalid account AccountClassification: %v\n", acc.Attributes.AccountClassification)
+			return
+		}
+		fmt.Printf("OK\n")
+	}
 }
 
-func deleteAccount() {
-	_, err := client.Account.Delete(context.Background(), id, 0)
-	if err != nil {
-		fmt.Printf("Account.Delete returned error: %v", err)
-	}
-
-	// check again and verify not exists
-	acc, _, _, e := client.Account.Fetch(context.Background(), id)
-	if e != nil {
-		fmt.Printf("Account.Fetch returned error: %v\n", e)
-	}
-	if acc != nil {
-		fmt.Printf("Still exists %v after deleting.\n", id)
-	}
-}
-
-func page(page int, perPage int) {
-	accounts, _, _, err := client.Account.List(context.Background(), &form3.ListOptions{Page: page, PerPage: perPage})
-	if err != nil {
-		fmt.Printf("Account.List returned error: %v\n", err)
-	}
-
-	if len(accounts) == 0 {
-		fmt.Printf("Account.List returned no accounts\n")
-	}
-}
-
-func test() {
-	_, _, _, err := client.Account.List(context.Background(), &form3.ListOptions{Page: 1, PerPage: 10})
-	if err != nil {
-		fmt.Printf("Account.List returned error: %v\n", err)
-	}
-
+func deleteAccount(id string) {
 	acc, _, _, err := client.Account.Fetch(context.Background(), id)
 	if err != nil {
 		fmt.Printf("Account.Fetch returned error: %v\n", err)
+		return
 	}
 
-	if acc != nil { // If already exists, delete then recreate account.
-		deleteAccount()
-		createAccount()
-	} else { // Otherwise, create account and then delete it.
-		createAccount()
-		deleteAccount()
+	_, err = client.Account.Delete(context.Background(), id, 0)
+	if err != nil {
+		fmt.Printf("Account.Delete returned error: %v\n", err)
+		return
+	}
+
+	// check again and verify not exists
+	acc, _, _, err = client.Account.Fetch(context.Background(), id)
+	if err != nil {
+		fmt.Printf("Account.Fetch returned error: %v\n", err)
+		return
+	}
+	if acc != nil {
+		fmt.Printf("Still exists %v after deleting.\n", id)
+		return
+	}
+	fmt.Printf("OK\n")
+}
+
+func createAccountBunch(number int) {
+	for i := 0; i < number; i++ {
+		uid, err := uuid()
+		if err != nil {
+			fmt.Printf("uuid generation error\n")
+			return
+		}
+		id := strings.TrimSuffix(string(uid), "\n")
+		fmt.Printf("%v: Creating account %v...\n", i, id)
+		createAccount(id, i == 0)
 	}
 }
 
@@ -229,29 +185,7 @@ func getAllPages(perPage int) []*form3.Account {
 func deleteAll(accounts []*form3.Account) {
 	for i, elem := range accounts {
 		fmt.Printf("%v: Deleting account %s...\n", i+1, elem.ID)
-		acc, _, _, err := client.Account.Fetch(context.Background(), elem.ID)
-		if err != nil {
-			fmt.Printf("Account.Fetch returned error: %v\n", err)
-			return
-		}
-
-		_, err = client.Account.Delete(context.Background(), elem.ID, 0)
-		if err != nil {
-			fmt.Printf("Account.Delete returned error: %v\n", err)
-			return
-		}
-
-		// check again and verify not exists
-		acc, _, _, err = client.Account.Fetch(context.Background(), elem.ID)
-		if err != nil {
-			fmt.Printf("Account.Fetch returned error: %v\n", err)
-			return
-		}
-		if acc != nil {
-			fmt.Printf("Still exists %v after deleting.\n", elem.ID)
-			return
-		}
-		fmt.Printf("OK\n")
+		deleteAccount(elem.ID)
 	}
 }
 
