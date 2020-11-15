@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const defaultBaseURL = "http://accountapi/"
+const defaultBaseURL = "http://accountapi:8080/"
 
 type Client struct {
 	client *http.Client

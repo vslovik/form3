@@ -106,10 +106,6 @@ Make repository public and
     $ cd tests 
     $ go test -v -tags=integration ./integration
     
-    or
-    
-    $ sh run.sh
-    
 #### To run Form3 SDK usage examples
 
     $ cd examples/accounts

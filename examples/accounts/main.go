@@ -2,30 +2,28 @@ package main
 
 import (
 	"context"
+	"crypto/rand"
 	"fmt"
 	"github.com/vslovik/form3/form3"
-	"os/exec"
+	"log"
 	"strings"
 )
 
 var client = form3.NewClient(nil)
 
-func uuid() (string, error) {
-	cmd := exec.Command("uuidgen")
-	stdout, err := cmd.Output()
+func uuid() string {
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
 	if err != nil {
-		fmt.Println(err.Error())
-		return "", err
+		log.Fatal(err)
 	}
-	return string(stdout), nil
+	uuid := fmt.Sprintf("%x-%x-%x-%x-%x",
+		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+	return uuid
 }
 
 func createAccount(id string, check bool) {
-	uid, err := uuid()
-	if err != nil {
-		fmt.Printf("uuid generation error\n")
-		return
-	}
+	uid := uuid()
 	operationId := strings.TrimSuffix(string(uid), "\n")
 
 	attr := &form3.AccountCreateRequestAttributes{
@@ -132,11 +130,7 @@ func deleteAccount(id string) {
 
 func createAccountBunch(number int) {
 	for i := 0; i < number; i++ {
-		uid, err := uuid()
-		if err != nil {
-			fmt.Printf("uuid generation error\n")
-			return
-		}
+		uid := uuid()
 		id := strings.TrimSuffix(string(uid), "\n")
 		fmt.Printf("%v: Creating account %v...\n", i, id)
 		createAccount(id, i == 0)
