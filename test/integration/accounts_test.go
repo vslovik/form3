@@ -17,12 +17,12 @@ func deleteAccount(t *testing.T) {
 	}
 
 	// check again and verify not exists
-	acc, _, e := client.Account.Fetch(context.Background(), id)
+	acc, _, _, e := client.Account.Fetch(context.Background(), id)
 	if e != nil {
 		t.Fatalf("Account.Fetch returned error: %v", e)
 	}
 	if acc != nil {
-		t.Fatalf("Still exists %v after deleting.", id, id)
+		t.Fatalf("Still exists %v after deleting.", id)
 	}
 }
 
@@ -46,7 +46,7 @@ func createAccount(t *testing.T) {
 	}
 
 	// check again and verify exists
-	acc, _, err = client.Account.Fetch(context.Background(), id)
+	acc, _, _, err := client.Account.Fetch(context.Background(), id)
 	if err != nil {
 		t.Fatalf("Account.Fetch returned error: %v", err)
 	}
@@ -65,7 +65,7 @@ func TestAccount_ListFetchCreateDelete(t *testing.T) {
 		t.Errorf("Account.List returned no accounts")
 	}
 
-	acc, _, err := client.Account.Fetch(context.Background(), id)
+	acc, _, _, err := client.Account.Fetch(context.Background(), id)
 	if err != nil {
 		t.Fatalf("Account.Fetch returned error: %v", err)
 	}
