@@ -87,7 +87,7 @@ for {
 
 ### Integration Tests ###
 
-You can run integration tests from the `test` directory. See the integration tests [README](test/README.md).
+You can run integration tests from the `test` directory. See the integration tests [README](tests/README.md).
 
 ### To run unit tests
 
