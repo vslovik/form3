@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-const defaultBaseURL = "http://accountapi:8080/"
+const defaultBaseURL = "http://localhost:8080/"
 
 type Client struct {
 	client *http.Client
@@ -129,10 +129,14 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Res
 		// won't reuse it anyway.
 		const maxBodySlurpSize = 2 << 10
 		if resp.ContentLength == -1 || resp.ContentLength <= maxBodySlurpSize {
-			io.CopyN(ioutil.Discard, resp.Body, maxBodySlurpSize)
+			_, err := io.CopyN(ioutil.Discard, resp.Body, maxBodySlurpSize)
+			if err != nil {
+			}
 		}
 
-		resp.Body.Close()
+		err := resp.Body.Close()
+		if err != nil {
+		}
 	}()
 
 	response := newResponse(resp)
@@ -144,7 +148,7 @@ func (c *Client) Do(ctx context.Context, req *http.Request, v interface{}) (*Res
 
 	if v != nil {
 		if w, ok := v.(io.Writer); ok {
-			io.Copy(w, resp.Body)
+			_, err = io.Copy(w, resp.Body)
 		} else {
 			decErr := json.NewDecoder(resp.Body).Decode(v)
 			if decErr == io.EOF {

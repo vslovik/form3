@@ -29,6 +29,7 @@ func addOptions(s string, opts interface{}) (string, error) {
 	}
 
 	qs, err := Values(opts)
+
 	if err != nil {
 		return s, err
 	}

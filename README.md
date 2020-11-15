@@ -5,7 +5,7 @@ form3 is a Go client library for accessing the [Form3 API][].
 
 ## Usage ##
 ```go
-import "github.com/vslovik/api-form3-examples"	
+import "github.com/vslovik/form3/form3"	
 ```
 
 Construct a new Form3 client, then use the account service on the client to
@@ -67,21 +67,21 @@ Pages information is available via the
 ```go
 client := form3.NewClient(nil)
 
-opt := &form3.AccountOptions{
-	ListOptions: github.ListOptions{PerPage: 10},
-}
-// get all pages of results
 var allAccounts []*form3.Account
+opt := &form3.ListOptions{PerPage: 2}
+i := 0
 for {
-    accounts, _, resp, err := client.Account.List(ctx, opt)
-	if err != nil {
-		return err
-	}
-	allAccounts = append(allAccounts, accounts...)
-	if resp.NextPage == 0 {
-		break
-	}
-	opt.Page = resp.NextPage
+    opt.Page = i
+    accounts, _, _, err := client.Account.List(context.Background(), opt)
+    if len(accounts) == 0 {
+        fmt.Printf("Account.List returned no accounts\n")
+        break
+    }
+    if err != nil {
+        fmt.Printf("Account.List returned error: %v\n", err)
+    }
+    allAccounts = append(allAccounts, accounts...)
+    i += 1
 }
 ```
 
@@ -109,8 +109,6 @@ Make repository public and
     or
     
     $ sh run.sh
-    
-    
     
 #### To run Form3 SDK usage examples
 
