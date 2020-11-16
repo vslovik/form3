@@ -9,6 +9,11 @@ import (
 	"testing"
 )
 
+const (
+	id          = "d91afcdb-62d2-4185-b23d-71c98eaab815"
+	operationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
+)
+
 var client = NewClient(nil)
 
 func uuid() string {
@@ -25,7 +30,7 @@ func uuid() string {
 func createAccount(t *testing.T, id string, check bool) {
 	uid := uuid()
 
-	operationId := strings.TrimSuffix(string(uid), "\n")
+	operationId := strings.TrimSuffix(uid, "\n")
 
 	attr := &AccountCreateRequestAttributes{
 		BankID:                "400300",
@@ -115,7 +120,7 @@ func deleteAccount(t *testing.T, id string) {
 func createAccountBunch(t *testing.T, number int) {
 	for i := 0; i < number; i++ {
 		uid := uuid()
-		id := strings.TrimSuffix(string(uid), "\n")
+		id := strings.TrimSuffix(uid, "\n")
 		fmt.Printf("%v: Creating account %v...\n", i, id)
 		createAccount(t, id, i == 0)
 	}
@@ -193,4 +198,201 @@ func TestAccount_ListFetchCreateDelete(t *testing.T) {
 		t.Fatalf("%v accounts retrieved\n", len(accounts))
 	}
 	fmt.Printf("OK\n")
+}
+
+func TestCreate_BadRequestEmptyAccountId(t *testing.T) {
+	fmt.Print("Test: Create: bad request: empty account id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), "", operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestEmptyOperationId(t *testing.T) {
+	fmt.Print("Test: Create: bad request: empty operation id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, "", attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestEmptyAttributesList(t *testing.T) {
+	fmt.Print("Test: Create: bad request: empty attributes list\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, &AccountCreateRequestAttributes{})
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidId(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), "x", operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidOperationId(t *testing.T) {
+	fmt.Print("Test: Create: bad request: operation id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, "x", attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidCountry(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid country\n")
+	attr.Country = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidBaseCurrency(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid base currency\n")
+	attr.BaseCurrency = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidIban(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid IBAN\n")
+	attr.Iban = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidBic(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid BIC\n")
+	attr.Bic = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestCreate_BadRequestInvalidAccountClassification(t *testing.T) {
+	fmt.Print("Test: Create: bad request: invalid account classification\n")
+	attr.AccountClassification = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestFetch_NotExistentAccount(t *testing.T) {
+	fmt.Print("Test: Fetch: bad request: account does not exist\n")
+	_, _, resp, err := client.Account.Fetch(context.Background(), "d91afcdb-xxxx-4185-b23d-71c98eaab815")
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
+}
+
+func TestDelete_NotExistentAccount(t *testing.T) {
+	fmt.Print("Test: Delete: bad request: account does not exist\n")
+	resp, err := client.Account.Delete(context.Background(), "d91afcdb-xxxx-4185-b23d-71c98eaab815", 0)
+	if err == nil {
+		t.Fatalf("Test failed: no error\n")
+	}
+	if resp == nil {
+		t.Fatalf("Test failed: response is nil\n")
+	}
+
+	if resp.StatusCode != 400 {
+		t.Fatalf("Test failed: response status code (%v) is not 400\n", resp.StatusCode)
+	}
+	fmt.Print("OK\n")
 }

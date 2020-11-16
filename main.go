@@ -8,6 +8,47 @@ import (
 	"strings"
 )
 
+const (
+	id          = "d91afcdb-62d2-4185-b23d-71c98eaab815"
+	operationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
+)
+
+var attr = &form3.AccountCreateRequestAttributes{
+	BankID:                  "400300",
+	BankIDCode:              "GBDSC",
+	BaseCurrency:            "GBP",
+	Bic:                     "NWBKGB22",
+	Country:                 "GB",
+	AccountNumber:           "10000004",
+	CustomerID:              "234",
+	Iban:                    "GB28NWBK40030212764204",
+	AccountClassification:   "Personal",
+	JointAccount:            true,
+	Switched:                "X",
+	SecondaryIdentification: "X",
+	AccountMatchingOptOut:   false,
+	AlternativeNames:        false,
+}
+
+func resetAttr() {
+	attr = &form3.AccountCreateRequestAttributes{
+		BankID:                  "400300",
+		BankIDCode:              "GBDSC",
+		BaseCurrency:            "GBP",
+		Bic:                     "NWBKGB22",
+		Country:                 "GB",
+		AccountNumber:           "10000004",
+		CustomerID:              "234",
+		Iban:                    "GB28NWBK40030212764204",
+		AccountClassification:   "Personal",
+		JointAccount:            true,
+		Switched:                "X",
+		SecondaryIdentification: "X",
+		AccountMatchingOptOut:   false,
+		AlternativeNames:        false,
+	}
+}
+
 var client = form3.NewClient(nil)
 
 func uuid() (string, error) {
@@ -28,77 +69,52 @@ func createAccount(id string, check bool) {
 	}
 	operationId := strings.TrimSuffix(string(uid), "\n")
 
-	attr := &form3.AccountCreateRequestAttributes{
-		BankID:                "400300",
-		BankIDCode:            "GBDSC",
-		BaseCurrency:          "GBP",
-		Bic:                   "NWBKGB22",
-		Country:               "GB",
-		AccountNumber:         "10000004",
-		CustomerID:            "234",
-		Iban:                  "GB28NWBK40030212764204",
-		AccountClassification: "Personal",
-	}
-
 	acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
 	if err != nil {
-		fmt.Printf("Account.Create returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.Create returned error: %v\n", err))
 	}
 	if acc == nil {
-		fmt.Printf("Account %v does not exists after creation.\n", id)
+		panic(fmt.Sprintf("Account %v does not exists after creation.\n", id))
 	}
 	fmt.Printf("OK\n")
 	if check {
 		fmt.Printf("Fetching account %v, checking all properties are correctly set...\n", id)
 		acc, _, _, err := client.Account.Fetch(context.Background(), id)
 		if err != nil {
-			fmt.Printf("Account.Fetch returned error: %v\n", err)
-			return
+			panic(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
 		}
 		if acc.OrganisationID != operationId {
-			fmt.Printf("Invalid account OrganisationID: %v\n", acc.OrganisationID)
-			return
+			panic(fmt.Sprintf("Invalid account OrganisationID: %v\n", acc.OrganisationID))
 		}
 		if acc.Type != "accounts" {
-			fmt.Printf("Invalid account Type: %v\n", acc.Type)
-			return
+			panic(fmt.Sprintf("Invalid account Type: %v\n", acc.Type))
 		}
 		if acc.Attributes.BankID != "400300" {
-			fmt.Printf("Invalid account BankID: %v\n", acc.Attributes.BankID)
-			return
+			panic(fmt.Sprintf("Invalid account BankID: %v\n", acc.Attributes.BankID))
 		}
 		if acc.Attributes.BankIDCode != "GBDSC" {
-			fmt.Printf("Invalid account BankIDCode: %v\n", acc.Attributes.BankIDCode)
-			return
+			panic(fmt.Sprintf("Invalid account BankIDCode: %v\n", acc.Attributes.BankIDCode))
 		}
 		if acc.Attributes.BaseCurrency != "GBP" {
-			fmt.Printf("Invalid account BaseCurrency: %v\n", acc.Attributes.BaseCurrency)
-			return
+			panic(fmt.Sprintf("Invalid account BaseCurrency: %v\n", acc.Attributes.BaseCurrency))
 		}
 		if acc.Attributes.Bic != "NWBKGB22" {
-			fmt.Printf("Invalid account Bic: %v\n", acc.Attributes.Bic)
-			return
+			panic(fmt.Sprintf("Invalid account Bic: %v\n", acc.Attributes.Bic))
 		}
 		if acc.Attributes.Country != "GB" {
-			fmt.Printf("Invalid account Country: %v\n", acc.Attributes.Country)
-			return
+			panic(fmt.Sprintf("Invalid account Country: %v\n", acc.Attributes.Country))
 		}
 		if acc.Attributes.AccountNumber != "10000004" {
-			fmt.Printf("Invalid account AccountNumber: %v\n", acc.Attributes.AccountNumber)
-			return
+			panic(fmt.Sprintf("Invalid account AccountNumber: %v\n", acc.Attributes.AccountNumber))
 		}
 		if acc.Attributes.CustomerID != "234" {
-			fmt.Printf("Invalid account CustomerID: %v\n", acc.Attributes.CustomerID)
-			return
+			panic(fmt.Sprintf("Invalid account CustomerID: %v\n", acc.Attributes.CustomerID))
 		}
 		if acc.Attributes.Iban != "GB28NWBK40030212764204" {
-			fmt.Printf("Invalid account Iban: %v\n", acc.Attributes.Iban)
-			return
+			panic(fmt.Sprintf("Invalid account Iban: %v\n", acc.Attributes.Iban))
 		}
 		if acc.Attributes.AccountClassification != "Personal" {
-			fmt.Printf("Invalid account AccountClassification: %v\n", acc.Attributes.AccountClassification)
-			return
+			panic(fmt.Sprintf("Invalid account AccountClassification: %v\n", acc.Attributes.AccountClassification))
 		}
 		fmt.Printf("OK\n")
 	}
@@ -107,25 +123,21 @@ func createAccount(id string, check bool) {
 func deleteAccount(id string) {
 	acc, _, _, err := client.Account.Fetch(context.Background(), id)
 	if err != nil {
-		fmt.Printf("Account.Fetch returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
 	}
 
 	_, err = client.Account.Delete(context.Background(), id, 0)
 	if err != nil {
-		fmt.Printf("Account.Delete returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.Delete returned error: %v\n", err))
 	}
 
 	// check again and verify not exists
 	acc, _, _, err = client.Account.Fetch(context.Background(), id)
 	if err != nil {
-		fmt.Printf("Account.Fetch returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
 	}
 	if acc != nil {
-		fmt.Printf("Still exists %v after deleting.\n", id)
-		return
+		panic(fmt.Sprintf("Still exists %v after deleting.\n", id))
 	}
 	fmt.Printf("OK\n")
 }
@@ -150,8 +162,7 @@ func getPage(page int, opt *form3.ListOptions) ([]*form3.Account, error) {
 		fmt.Printf("Got account %s \n", elem.ID)
 	}
 	if err != nil {
-		fmt.Printf("Account.List returned error: %v\n", err)
-		return nil, err
+		panic(fmt.Sprintf("Account.List returned error: %v\n", err))
 	}
 
 	return accounts, nil
@@ -187,7 +198,7 @@ func deleteAll(accounts []*form3.Account) {
 	}
 }
 
-func main() {
+func positiveTestCases() {
 	n := 10
 	fmt.Printf("I want to create %v accounts...\n", n)
 	createAccountBunch(n)
@@ -199,14 +210,12 @@ func main() {
 	fmt.Printf("I want to retrive all accounts in one request\n")
 	accounts, _, _, err := client.Account.List(context.Background(), nil)
 	if err != nil {
-		fmt.Printf("Account.List returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.List returned error: %v\n", err))
 	}
 	fmt.Printf("%v accounts retrieved\n", len(accounts))
 	fmt.Printf("I check that the number of accounts retrived in both operations is the same\n")
 	if len(accounts) != len(allAccounts) {
-		fmt.Printf("Wrong number of accounts retrieved\n")
-		return
+		panic(fmt.Sprintf("Wrong number of accounts retrieved\n"))
 	} else {
 		fmt.Printf("OK")
 	}
@@ -216,12 +225,230 @@ func main() {
 	fmt.Printf("I want to check that there is no accounts left\n")
 	accounts, _, _, err = client.Account.List(context.Background(), nil)
 	if err != nil {
-		fmt.Printf("Account.List returned error: %v\n", err)
-		return
+		panic(fmt.Sprintf("Account.List returned error: %v\n", err))
 	}
 	if len(accounts) > 0 {
-		fmt.Printf("%v accounts retrieved\n", len(accounts))
-		return
+		panic(fmt.Sprintf("%v accounts retrieved\n", len(accounts)))
 	}
 	fmt.Printf("OK\n")
+}
+
+func testCreateBadRequestEmptyAccountId() {
+	fmt.Print("Test: Create: bad request: empty account id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), "", operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+}
+
+func testCreateBadRequestEmptyOperationId() {
+	fmt.Print("Test: Create: bad request: empty operation id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, "", attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+}
+
+func testCreateBadRequestEmptyAttributesList() {
+	fmt.Print("Test: Create: bad request: empty attributes list\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, &form3.AccountCreateRequestAttributes{})
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+}
+
+func testCreateBadRequestInvalidId() {
+	fmt.Print("Test: Create: bad request: invalid id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), "x", operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+}
+
+func testCreateBadRequestInvalidOperationId() {
+	fmt.Print("Test: Create: bad request: operation id\n")
+	_, _, resp, err := client.Account.Create(context.Background(), id, "x", attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+}
+
+func testCreateBadRequestInvalidCountry() {
+	fmt.Print("Test: Create: bad request: invalid country\n")
+	attr.Country = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testCreateBadRequestInvalidBaseCurrency() {
+	fmt.Print("Test: Create: bad request: invalid base currency\n")
+	attr.BaseCurrency = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testCreateBadRequestInvalidIban() {
+	fmt.Print("Test: Create: bad request: invalid IBAN\n")
+	attr.Iban = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testCreateBadRequestInvalidBic() {
+	fmt.Print("Test: Create: bad request: invalid BIC\n")
+	attr.Bic = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testCreateBadRequestInvalidAccountClassification() {
+	fmt.Print("Test: Create: bad request: invalid account classification\n")
+	attr.AccountClassification = "x"
+	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testFetchNotExistentAccount() {
+	fmt.Print("Test: Fetch: bad request: account does not exist\n")
+	_, _, resp, err := client.Account.Fetch(context.Background(), "d91afcdb-xxxx-4185-b23d-71c98eaab815")
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func testDeleteNotExistentAccount() {
+	fmt.Print("Test: Delete: bad request: account does not exist\n")
+	resp, err := client.Account.Delete(context.Background(), "d91afcdb-xxxx-4185-b23d-71c98eaab815", 0)
+	if err == nil {
+		panic("Test failed\n")
+	}
+	if resp == nil {
+		panic("Test failed\n")
+	}
+
+	if resp.StatusCode != 400 {
+		panic("Test failed\n")
+	}
+	fmt.Print("OK\n")
+	resetAttr()
+}
+
+func main() {
+	positiveTestCases()
+	testCreateBadRequestEmptyAccountId()
+	testCreateBadRequestEmptyOperationId()
+	testCreateBadRequestEmptyAttributesList()
+	testCreateBadRequestInvalidId()
+	testCreateBadRequestInvalidOperationId()
+	testCreateBadRequestInvalidCountry()
+	testCreateBadRequestInvalidBaseCurrency()
+	testCreateBadRequestInvalidIban()
+	testCreateBadRequestInvalidBic()
+	testCreateBadRequestInvalidAccountClassification()
+	testFetchNotExistentAccount()
+	testDeleteNotExistentAccount()
 }

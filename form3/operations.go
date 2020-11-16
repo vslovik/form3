@@ -62,15 +62,20 @@ type AccountCreateResponse struct {
 
 // Request
 type AccountCreateRequestAttributes struct {
-	AccountClassification string `json:"account_classification"`
-	AccountNumber         string `json:"account_number"`
-	BankID                string `json:"bank_id"`
-	BankIDCode            string `json:"bank_id_code"`
-	BaseCurrency          string `json:"base_currency"`
-	Bic                   string `json:"bic"`
-	Country               string `json:"country"`
-	CustomerID            string `json:"customer_id"`
-	Iban                  string `json:"iban"`
+	AccountClassification   string `json:"account_classification"`
+	AccountNumber           string `json:"account_number"`
+	BankID                  string `json:"bank_id"`
+	BankIDCode              string `json:"bank_id_code"`
+	BaseCurrency            string `json:"base_currency"`
+	Bic                     string `json:"bic"`
+	Country                 string `json:"country"`
+	CustomerID              string `json:"customer_id"`
+	Iban                    string `json:"iban"`
+	JointAccount            bool   `json:"joint_account"`
+	Switched                string `json:"switched"`
+	SecondaryIdentification string `json:"secondary_identification"`
+	AccountMatchingOptOut   bool   `json:"account_matching_opt_out"`
+	AlternativeNames        bool   `json:"alternative_names"`
 }
 
 type AccountCreateRequestData struct {
@@ -93,11 +98,11 @@ type AccountCreateRequest struct {
 5. !!! Validate currency (belongs to list) list_one.xls
 */
 // Form3 API docs: https://api-docs.form3.tech/api.html#organisation-accounts-create
-func (s *AccountService) Create(ctx context.Context, id string, organizationId string, attributes *AccountCreateRequestAttributes) (*Account, *AccountCreateLinks, *Response, error) {
+func (s *AccountService) Create(ctx context.Context, id string, operationId string, attributes *AccountCreateRequestAttributes) (*Account, *AccountCreateLinks, *Response, error) {
 	req, err := s.client.NewRequest("POST", "/v1/organisation/accounts",
 		&AccountCreateRequest{&AccountCreateRequestData{
 			attributes,
-			organizationId,
+			operationId,
 			id,
 			"accounts"}})
 	if err != nil {
