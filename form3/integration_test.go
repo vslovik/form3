@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	id          = "d91afcdb-62d2-4185-b23d-71c98eaab815"
+	id          = "d91afcdb-62d2-4185-b23d-71c98eaab831"
 	operationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
 )
 
@@ -44,7 +44,10 @@ func createAccount(t *testing.T, id string, check bool) {
 		AccountClassification: "Personal",
 	}
 
-	acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
+	acc, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	if resp != nil && resp.StatusCode != 201 {
+		t.Fatalf("Account.Create response status code (%v) is not 201\n", resp.StatusCode)
+	}
 	if err != nil {
 		t.Fatalf("Account.Create returned error: %v\n", err)
 	}
@@ -54,7 +57,10 @@ func createAccount(t *testing.T, id string, check bool) {
 	fmt.Printf("OK\n")
 	if check {
 		fmt.Printf("Fetching account %v, checking all properties are correctly set...\n", id)
-		acc, _, _, err := client.Account.Fetch(context.Background(), id)
+		acc, _, resp, err := client.Account.Fetch(context.Background(), id)
+		if resp != nil && resp.StatusCode != 200 {
+			t.Fatalf("Account.Fetch response status code (%v) is not 200\n", resp.StatusCode)
+		}
 		if err != nil {
 			t.Fatalf("Account.Fetch returned error: %v\n", err)
 		}
@@ -101,9 +107,12 @@ func deleteAccount(t *testing.T, id string) {
 		t.Fatalf("Account.Fetch returned error: %v\n", err)
 	}
 
-	_, err = client.Account.Delete(context.Background(), id, 0)
+	resp, err := client.Account.Delete(context.Background(), id, 0)
 	if err != nil {
 		t.Fatalf("Account.Delete returned error: %v\n", err)
+	}
+	if resp != nil && resp.StatusCode != 204 {
+		t.Fatalf("Account.Delete response status code (%v) is not 204 (No Content)\n", resp.StatusCode)
 	}
 
 	// check again and verify not exists
