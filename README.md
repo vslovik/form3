@@ -1,7 +1,6 @@
 # form3 client #
 
-
-form3 is a Go client library for accessing the [Form3 API][].
+form3 is a Go client library for accessing the Form3 API.
 
 ## Usage ##
 ```go
@@ -107,4 +106,4 @@ Make repository public and
 
 ## Author
 
-Valeriya Slovikovskaya, vslovik@gmail.com (Almost new to GoLang)
+Valeriya Slovikovskaya, vslovik@gmail.com (almost new to GoLang).
