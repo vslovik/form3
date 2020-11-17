@@ -24,7 +24,7 @@ func uuid() string {
 
 func createAccount(id string, check bool) {
 	uid := uuid()
-	operationId := strings.TrimSuffix(string(uid), "\n")
+	organizationId := strings.TrimSuffix(string(uid), "\n")
 
 	attr := &form3.AccountCreateRequestAttributes{
 		BankID:                "400300",
@@ -38,7 +38,7 @@ func createAccount(id string, check bool) {
 		AccountClassification: "Personal",
 	}
 
-	acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
+	acc, _, _, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err != nil {
 		log.Fatal(fmt.Sprintf("Account.Create returned error: %v\n", err))
 	}
@@ -52,7 +52,7 @@ func createAccount(id string, check bool) {
 		if err != nil {
 			log.Fatal(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
 		}
-		if acc.OrganisationID != operationId {
+		if acc.OrganisationID != organizationId {
 			log.Fatal(fmt.Sprintf("Invalid account OrganisationID: %v\n", acc.OrganisationID))
 		}
 		if acc.Type != "accounts" {

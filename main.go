@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	id          = "d91afcdb-62d2-4185-b23d-71c98eaab815"
-	operationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
+	id             = "d91afcdb-62d2-4185-b23d-71c98eaab815"
+	organizationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
 )
 
 var attr = &form3.AccountCreateRequestAttributes{
@@ -67,9 +67,9 @@ func createAccount(id string, check bool) {
 		fmt.Printf("uuid generation error\n")
 		return
 	}
-	operationId := strings.TrimSuffix(string(uid), "\n")
+	organizationId := strings.TrimSuffix(string(uid), "\n")
 
-	acc, _, _, err := client.Account.Create(context.Background(), id, operationId, attr)
+	acc, _, _, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err != nil {
 		panic(fmt.Sprintf("Account.Create returned error: %v\n", err))
 	}
@@ -83,7 +83,7 @@ func createAccount(id string, check bool) {
 		if err != nil {
 			panic(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
 		}
-		if acc.OrganisationID != operationId {
+		if acc.OrganisationID != organizationId {
 			panic(fmt.Sprintf("Invalid account OrganisationID: %v\n", acc.OrganisationID))
 		}
 		if acc.Type != "accounts" {
@@ -238,7 +238,7 @@ func positiveTestCases() {
 
 func testCreateBadRequestEmptyAccountId() {
 	fmt.Print("Test: Create: bad request: empty account id\n")
-	_, _, resp, err := client.Account.Create(context.Background(), "", operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), "", organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -270,7 +270,7 @@ func testCreateBadRequestEmptyOperationId() {
 
 func testCreateBadRequestEmptyAttributesList() {
 	fmt.Print("Test: Create: bad request: empty attributes list\n")
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, &form3.AccountCreateRequestAttributes{})
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, &form3.AccountCreateRequestAttributes{})
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -286,7 +286,7 @@ func testCreateBadRequestEmptyAttributesList() {
 
 func testCreateBadRequestInvalidId() {
 	fmt.Print("Test: Create: bad request: invalid id\n")
-	_, _, resp, err := client.Account.Create(context.Background(), "x", operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), "x", organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -301,7 +301,7 @@ func testCreateBadRequestInvalidId() {
 }
 
 func testCreateBadRequestInvalidOperationId() {
-	fmt.Print("Test: Create: bad request: operation id\n")
+	fmt.Print("Test: Create: bad request: organization id\n")
 	_, _, resp, err := client.Account.Create(context.Background(), id, "x", attr)
 	if err == nil {
 		panic("Test failed\n")
@@ -319,7 +319,7 @@ func testCreateBadRequestInvalidOperationId() {
 func testCreateBadRequestInvalidCountry() {
 	fmt.Print("Test: Create: bad request: invalid country\n")
 	attr.Country = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -337,7 +337,7 @@ func testCreateBadRequestInvalidCountry() {
 func testCreateBadRequestInvalidBaseCurrency() {
 	fmt.Print("Test: Create: bad request: invalid base currency\n")
 	attr.BaseCurrency = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -355,7 +355,7 @@ func testCreateBadRequestInvalidBaseCurrency() {
 func testCreateBadRequestInvalidIban() {
 	fmt.Print("Test: Create: bad request: invalid IBAN\n")
 	attr.Iban = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -373,7 +373,7 @@ func testCreateBadRequestInvalidIban() {
 func testCreateBadRequestInvalidBic() {
 	fmt.Print("Test: Create: bad request: invalid BIC\n")
 	attr.Bic = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}
@@ -391,7 +391,7 @@ func testCreateBadRequestInvalidBic() {
 func testCreateBadRequestInvalidAccountClassification() {
 	fmt.Print("Test: Create: bad request: invalid account classification\n")
 	attr.AccountClassification = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		panic("Test failed\n")
 	}

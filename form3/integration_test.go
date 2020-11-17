@@ -10,9 +10,26 @@ import (
 )
 
 const (
-	id          = "d91afcdb-62d2-4185-b23d-71c98eaab831"
-	operationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
+	id             = "d91afcdb-62d2-4185-b23d-71c98eaab831"
+	organizationId = "d91afcdb-62d2-4185-b23d-71c98eaab812"
 )
+
+var attr = &AccountCreateRequestAttributes{
+	BankID:                  "400300",
+	BankIDCode:              "GBDSC",
+	BaseCurrency:            "GBP",
+	Bic:                     "NWBKGB22",
+	Country:                 "GB",
+	AccountNumber:           "10000004",
+	CustomerID:              "234",
+	Iban:                    "GB28NWBK40030212764204",
+	AccountClassification:   "Personal",
+	JointAccount:            true,
+	Switched:                "X",
+	SecondaryIdentification: "X",
+	AccountMatchingOptOut:   false,
+	AlternativeNames:        false,
+}
 
 var client = NewClient(nil)
 
@@ -30,26 +47,9 @@ func uuid() string {
 func createAccount(t *testing.T, id string, check bool) {
 	uid := uuid()
 
-	operationId := strings.TrimSuffix(uid, "\n")
+	organizationId := strings.TrimSuffix(uid, "\n")
 
-	attr = &AccountCreateRequestAttributes{
-		BankID:                  "400300",
-		BankIDCode:              "GBDSC",
-		BaseCurrency:            "GBP",
-		Bic:                     "NWBKGB22",
-		Country:                 "GB",
-		AccountNumber:           "10000004",
-		CustomerID:              "234",
-		Iban:                    "GB28NWBK40030212764204",
-		AccountClassification:   "Personal",
-		JointAccount:            true,
-		Switched:                "X",
-		SecondaryIdentification: "X",
-		AccountMatchingOptOut:   false,
-		AlternativeNames:        false,
-	}
-
-	acc, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	acc, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if resp != nil && resp.StatusCode != 201 {
 		t.Fatalf("Account.Create response status code (%v) is not 201\n", resp.StatusCode)
 	}
@@ -69,7 +69,7 @@ func createAccount(t *testing.T, id string, check bool) {
 		if err != nil {
 			t.Fatalf("Account.Fetch returned error: %v\n", err)
 		}
-		if acc.OrganisationID != operationId {
+		if acc.OrganisationID != organizationId {
 			t.Fatalf("Invalid account OrganisationID: %v\n", acc.OrganisationID)
 		}
 		if acc.Type != "accounts" {
@@ -219,7 +219,7 @@ func TestAccount_ListFetchCreateDelete(t *testing.T) {
 
 func TestCreate_BadRequestEmptyAccountId(t *testing.T) {
 	fmt.Print("Test: Create: bad request: empty account id\n")
-	_, _, resp, err := client.Account.Create(context.Background(), "", operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), "", organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -234,7 +234,7 @@ func TestCreate_BadRequestEmptyAccountId(t *testing.T) {
 }
 
 func TestCreate_BadRequestEmptyOperationId(t *testing.T) {
-	fmt.Print("Test: Create: bad request: empty operation id\n")
+	fmt.Print("Test: Create: bad request: empty organization id\n")
 	_, _, resp, err := client.Account.Create(context.Background(), id, "", attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
@@ -251,7 +251,7 @@ func TestCreate_BadRequestEmptyOperationId(t *testing.T) {
 
 func TestCreate_BadRequestEmptyAttributesList(t *testing.T) {
 	fmt.Print("Test: Create: bad request: empty attributes list\n")
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, &AccountCreateRequestAttributes{})
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, &AccountCreateRequestAttributes{})
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -267,7 +267,7 @@ func TestCreate_BadRequestEmptyAttributesList(t *testing.T) {
 
 func TestCreate_BadRequestInvalidId(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid id\n")
-	_, _, resp, err := client.Account.Create(context.Background(), "x", operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), "x", organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -282,7 +282,7 @@ func TestCreate_BadRequestInvalidId(t *testing.T) {
 }
 
 func TestCreate_BadRequestInvalidOperationId(t *testing.T) {
-	fmt.Print("Test: Create: bad request: operation id\n")
+	fmt.Print("Test: Create: bad request: organization id\n")
 	_, _, resp, err := client.Account.Create(context.Background(), id, "x", attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
@@ -300,7 +300,7 @@ func TestCreate_BadRequestInvalidOperationId(t *testing.T) {
 func TestCreate_BadRequestInvalidCountry(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid country\n")
 	attr.Country = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -317,7 +317,7 @@ func TestCreate_BadRequestInvalidCountry(t *testing.T) {
 func TestCreate_BadRequestInvalidBaseCurrency(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid base currency\n")
 	attr.BaseCurrency = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -334,7 +334,7 @@ func TestCreate_BadRequestInvalidBaseCurrency(t *testing.T) {
 func TestCreate_BadRequestInvalidIban(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid IBAN\n")
 	attr.Iban = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -351,7 +351,7 @@ func TestCreate_BadRequestInvalidIban(t *testing.T) {
 func TestCreate_BadRequestInvalidBic(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid BIC\n")
 	attr.Bic = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}
@@ -368,7 +368,7 @@ func TestCreate_BadRequestInvalidBic(t *testing.T) {
 func TestCreate_BadRequestInvalidAccountClassification(t *testing.T) {
 	fmt.Print("Test: Create: bad request: invalid account classification\n")
 	attr.AccountClassification = "x"
-	_, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
+	_, _, resp, err := client.Account.Create(context.Background(), id, organizationId, attr)
 	if err == nil {
 		t.Fatalf("Test failed: no error\n")
 	}

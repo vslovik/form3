@@ -14,18 +14,6 @@ import (
 
 const baseURLPath = "/localhost:8080"
 
-var attr = &AccountCreateRequestAttributes{
-	Country:               "GB",
-	BaseCurrency:          "GBP",
-	BankID:                "400302",
-	BankIDCode:            "GBDSC",
-	AccountNumber:         "10000004",
-	CustomerID:            "234",
-	Iban:                  "GB28NWBK40030212764204",
-	Bic:                   "NWBKGB42",
-	AccountClassification: "Personal",
-}
-
 func setup() (client *Client, mux *http.ServeMux, serverURL string, teardown func()) {
 	mux = http.NewServeMux()
 	server := httptest.NewServer(mux)
