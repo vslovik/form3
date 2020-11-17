@@ -82,20 +82,36 @@ for {
 ```
 ## Tests ##
 
-#### To run unit tests with coverage
+#### To run all tests in the form3 package: integration `integration_test.go` and unit tests `operations_test.go`, run
+
+    $ go test -v
+    
+with coverage:
 
     $ go test -v --cover
     $ go test -coverprofile=coverage.out
     $ go tool cover -html=coverage.out
+    
+in docker-container:
+   
+    $ docker-compose up
+    
+NOTE: BaseUrl is set in `client.go`:
 
-#### To run integration tests
+```go
+const defaultBaseURL = "http://localhost:8080/"
+```
+It should be `http://localhost:8080/` when running test on the host machine and `http://accountapi:8080/` to run them 
+in docker container
+
+#### To run separated integration tests `tests/integration/accounts_test.go`
 Make repository public and
 
     $ go get -t github.com/vslovik/form3/form3
     $ cd tests 
     $ go test -v -tags=integration ./integration
 
-You can also run integration tests from the `tests` directory. See the integration tests [README](tests/README.md).
+See [README](tests/README.md).
     
 #### To run Form3 SDK usage examples
 Make repository public and
