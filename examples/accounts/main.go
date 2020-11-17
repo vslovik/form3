@@ -101,9 +101,12 @@ func deleteAccount(id string) {
 	}
 
 	// check again and verify not exists
-	acc, _, _, err = client.Account.Fetch(context.Background(), id)
-	if err != nil {
-		log.Fatal(fmt.Sprintf("Account.Fetch returned error: %v\n", err))
+	acc, _, resp, err := client.Account.Fetch(context.Background(), id)
+	if err == nil {
+		log.Fatal(fmt.Sprintf("Account.Fetch does not returned error on not existent account (%v) fetch\n", id))
+	}
+	if resp != nil && resp.StatusCode != 404 {
+		log.Fatal(fmt.Sprintf("Account.Fetch does not returned 404 staus code on not existent account (%v) fetch\n", id))
 	}
 	if acc != nil {
 		log.Fatal(fmt.Sprintf("Still exists %v after deleting.\n", id))
@@ -182,7 +185,7 @@ func main() {
 	if len(accounts) != len(allAccounts) {
 		log.Fatal(fmt.Sprintf("Wrong number of accounts retrieved\n"))
 	} else {
-		fmt.Printf("OK")
+		fmt.Printf("OK\n")
 	}
 	fmt.Printf("I want to delete all accounts\n")
 	deleteAll(accounts)

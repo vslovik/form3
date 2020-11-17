@@ -39,7 +39,7 @@ services:
     volumes:
       - .:/usr/local/go/src/go/form3
     working_dir: /usr/local/go/src/go/form3/form3
-    command: sh run.sh
+    command: go test -v
     depends_on:
       - accountapi
 

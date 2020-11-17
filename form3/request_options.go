@@ -5,8 +5,8 @@ import (
 	"reflect"
 )
 
-// ListOptions specifies the optional parameters to various List methods that
-// support offset pagination.
+// ListOptions specifies the optional parameters to List method that
+// supports offset pagination.
 type ListOptions struct {
 	// For paginated result sets, page of results to retrieve.
 	Page int `url:"page[number],omitempty"`

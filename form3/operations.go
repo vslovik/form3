@@ -136,8 +136,6 @@ func (s *AccountService) Fetch(ctx context.Context, id string) (*Account, *Accou
 	var r *AccountFetchResponse
 	resp, err := s.client.Do(ctx, req, &r)
 	if err != nil {
-		// if it's just a 404, don't return that as an error
-		_, err = parseBoolResponse(err)
 		return nil, nil, resp, err
 	}
 

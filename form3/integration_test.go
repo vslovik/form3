@@ -32,16 +32,21 @@ func createAccount(t *testing.T, id string, check bool) {
 
 	operationId := strings.TrimSuffix(uid, "\n")
 
-	attr := &AccountCreateRequestAttributes{
-		BankID:                "400300",
-		BankIDCode:            "GBDSC",
-		BaseCurrency:          "GBP",
-		Bic:                   "NWBKGB22",
-		Country:               "GB",
-		AccountNumber:         "10000004",
-		CustomerID:            "234",
-		Iban:                  "GB28NWBK40030212764204",
-		AccountClassification: "Personal",
+	attr = &AccountCreateRequestAttributes{
+		BankID:                  "400300",
+		BankIDCode:              "GBDSC",
+		BaseCurrency:            "GBP",
+		Bic:                     "NWBKGB22",
+		Country:                 "GB",
+		AccountNumber:           "10000004",
+		CustomerID:              "234",
+		Iban:                    "GB28NWBK40030212764204",
+		AccountClassification:   "Personal",
+		JointAccount:            true,
+		Switched:                "X",
+		SecondaryIdentification: "X",
+		AccountMatchingOptOut:   false,
+		AlternativeNames:        false,
 	}
 
 	acc, _, resp, err := client.Account.Create(context.Background(), id, operationId, attr)
@@ -116,9 +121,12 @@ func deleteAccount(t *testing.T, id string) {
 	}
 
 	// check again and verify not exists
-	acc, _, _, err = client.Account.Fetch(context.Background(), id)
-	if err != nil {
-		t.Fatalf("Account.Fetch returned error: %v\n", err)
+	acc, _, resp, err = client.Account.Fetch(context.Background(), id)
+	if err == nil {
+		t.Fatalf("Account.Fetch does not returned error on not existent account (%v) fetch\n", id)
+	}
+	if resp != nil && resp.StatusCode != 404 {
+		t.Fatalf("Account.Fetch does not returned 404 staus code on not existent account (%v) fetch\n", id)
 	}
 	if acc != nil {
 		t.Fatalf("Still exists %v after deleting.\n", id)
@@ -193,7 +201,7 @@ func TestAccount_ListFetchCreateDelete(t *testing.T) {
 	if len(accounts) != len(allAccounts) {
 		t.Fatalf("Wrong number of accounts retrieved\n")
 	} else {
-		fmt.Printf("OK")
+		fmt.Printf("OK\n")
 	}
 	fmt.Printf("I want to delete all accounts\n")
 	deleteAll(t, accounts)

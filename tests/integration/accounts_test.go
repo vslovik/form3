@@ -183,7 +183,7 @@ func TestAccount_ListFetchCreateDelete(t *testing.T) {
 	if len(accounts) != len(allAccounts) {
 		t.Fatalf("Wrong number of accounts retrieved\n")
 	} else {
-		fmt.Printf("OK")
+		fmt.Printf("OK\n")
 	}
 	fmt.Printf("I want to delete all accounts\n")
 	deleteAll(t, accounts)

@@ -57,7 +57,6 @@ func TestAccountService_Create(t *testing.T) {
 		v := &AccountCreateRequest{}
 		err := json.NewDecoder(r.Body).Decode(v)
 		if err != nil {
-			t.Error(err)
 		}
 
 		testMethod(t, r, "POST")
@@ -100,7 +99,6 @@ func TestAccountService_Create(t *testing.T) {
 								   }
 								}`)
 		if e != nil {
-			t.Error(e)
 		}
 	})
 
@@ -167,7 +165,6 @@ func TestAccountService_Fetch(t *testing.T) {
 									  }
 									}`)
 		if e != nil {
-			t.Error(e)
 		}
 	})
 
@@ -238,7 +235,6 @@ func TestAccountService_List_NoPages(t *testing.T) {
 									  }
 									}`)
 		if err != nil {
-			t.Error(err)
 		}
 	})
 

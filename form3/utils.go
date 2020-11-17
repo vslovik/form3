@@ -31,7 +31,6 @@ func Values(v interface{}) (url.Values, error) {
 
 // reflectValue populates the values parameter from the struct fields in val.
 func reflectValue(values url.Values, val reflect.Value) error {
-
 	typ := val.Type()
 	for i := 0; i < typ.NumField(); i++ {
 		sf := typ.Field(i)
@@ -92,15 +91,12 @@ func isEmptyValue(v reflect.Value) bool {
 	case reflect.Interface, reflect.Ptr:
 		return v.IsNil()
 	}
-
 	type zeroable interface {
 		IsZero() bool
 	}
-
 	if z, ok := v.Interface().(zeroable); ok {
 		return z.IsZero()
 	}
-
 	return false
 }
 
