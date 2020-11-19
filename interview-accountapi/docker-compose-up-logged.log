@@ -1,0 +1,365 @@
+Attaching to interview-accountapi_vault_1_24ca43299a6b, interview-accountapi_postgresql_1_214d57b5c05c, interview-accountapi_accountapi_1_7225c4504914, interview-accountapi_form3sdk_1_bf75a9878175
+[33mpostgresql_1_214d57b5c05c |[0m 
+[33mpostgresql_1_214d57b5c05c |[0m PostgreSQL Database directory appears to contain a database; Skipping initialization
+[33mpostgresql_1_214d57b5c05c |[0m 
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:11.976Z" level=info message="Loading secrets" service_name=interview_accountapi stack=
+[33mpostgresql_1_214d57b5c05c |[0m LOG:  database system was shut down at 2020-11-19 21:45:44 UTC
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:11.991Z" level=info message="applied 0 database migrations!\n" service_name=interview_accountapi stack=
+[33mpostgresql_1_214d57b5c05c |[0m LOG:  MultiXact member wraparound protections are now enabled
+[36mvault_1_24ca43299a6b |[0m [0;0m==> Vault server configuration:
+[36mvault_1_24ca43299a6b |[0m [0m
+[36mvault_1_24ca43299a6b |[0m [0;0m                     Cgo: disabled[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m         Cluster Address: https://0.0.0.0:8201[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m              Listener 1: tcp (addr: "0.0.0.0:8200", cluster address: "0.0.0.0:8201", tls: "disabled")[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m               Log Level: info[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m                   Mlock: supported: true, enabled: false[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m        Redirect Address: http://0.0.0.0:8200[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m                 Storage: inmem[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m                 Version: Vault v0.9.3[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m             Version Sha: 5acd6a21d5a69ab49d0f7c0bf540123a9b2c696d[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m[0m
+[33mpostgresql_1_214d57b5c05c |[0m LOG:  database system is ready to accept connections
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+[32maccountapi_1_7225c4504914 |[0m  - using env:	export GIN_MODE=release
+[32maccountapi_1_7225c4504914 |[0m  - using code:	gin.SetMode(gin.ReleaseMode)
+[32maccountapi_1_7225c4504914 |[0m 
+[33mpostgresql_1_214d57b5c05c |[0m LOG:  autovacuum launcher started
+[36mvault_1_24ca43299a6b |[0m [0;33mWARNING! dev mode is enabled! In this mode, Vault runs entirely in-memory
+[36mvault_1_24ca43299a6b |[0m and starts unsealed with a single unseal key. The root token is already
+[36mvault_1_24ca43299a6b |[0m authenticated to the CLI, so you can immediately begin using Vault.[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;33mYou may need to set the following environment variable:[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m    $ export VAULT_ADDR='http://0.0.0.0:8200'[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;33mThe unseal key and root token are displayed below in case you want to
+[36mvault_1_24ca43299a6b |[0m seal/unseal the Vault or re-authenticate.[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;33mUnseal Key: HD8ALbkmoSSIWbzK5hjZi8UZn8dkt/wHpncp44gHMCM=[0m
+[36mvault_1_24ca43299a6b |[0m [0;33mRoot Token: 8fb95528-57c6-422e-9722-d2147bcba8ed[0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;33mDevelopment mode should NOT be used in production installations![0m
+[36mvault_1_24ca43299a6b |[0m [0;33m[0m
+[36mvault_1_24ca43299a6b |[0m [0;0m==> Vault server started! Log data will stream in below:
+[36mvault_1_24ca43299a6b |[0m [0m
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] GET    /v1/health                --> github.com/form3tech/interview-accountapi/internal/app/interview-accountapi/api.HandleGetHealth (3 handlers)
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.535037 [INFO ] core: security barrier not initialized
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.535149 [INFO ] core: security barrier initialized: shares=1 threshold=1
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.535243 [INFO ] core: post-unseal setup starting
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544063 [INFO ] core: loaded wrapping token key
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544073 [INFO ] core: successfully setup plugin catalog: plugin-directory=
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544460 [INFO ] core: successfully mounted backend: type=kv path=secret/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544469 [INFO ] core: successfully mounted backend: type=cubbyhole path=cubbyhole/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544558 [INFO ] core: successfully mounted backend: type=system path=sys/
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] GET    /v1/organisation/accounts/:id --> github.com/form3tech/interview-accountapi/internal/app/interview-accountapi/api.WithUserContext.func1 (4 handlers)
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] DELETE /v1/organisation/accounts/:id --> github.com/form3tech/interview-accountapi/internal/app/interview-accountapi/api.WithUserContext.func1 (4 handlers)
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] GET    /v1/organisation/accounts --> github.com/form3tech/interview-accountapi/internal/app/interview-accountapi/api.WithUserContext.func1 (4 handlers)
+[32maccountapi_1_7225c4504914 |[0m [GIN-debug] POST   /v1/organisation/accounts --> github.com/form3tech/interview-accountapi/internal/app/interview-accountapi/api.WithUserContext.func1 (4 handlers)
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:11.991Z" level=info message="listening on localhost:8080" service_name=interview_accountapi stack=
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.544688 [INFO ] core: successfully mounted backend: type=identity path=identity/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546290 [INFO ] expiration: restoring leases
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546345 [INFO ] rollback: starting rollback manager
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546524 [INFO ] expiration: lease restore complete
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546736 [INFO ] identity: entities restored
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546746 [INFO ] identity: groups restored
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546756 [INFO ] core: post-unseal setup complete
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546871 [INFO ] core: root token generated
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546873 [INFO ] core: pre-seal teardown starting
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:11.991Z" level=info message="Server started on :8080" service_name=interview_accountapi stack=
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546876 [INFO ] core: cluster listeners not running
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546881 [INFO ] rollback: stopping rollback manager
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546914 [INFO ] core: pre-seal teardown complete
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546975 [INFO ] core: vault is unsealed
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.546985 [INFO ] core: post-unseal setup starting
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547023 [INFO ] core: loaded wrapping token key
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547024 [INFO ] core: successfully setup plugin catalog: plugin-directory=
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547154 [INFO ] core: successfully mounted backend: type=kv path=secret/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547223 [INFO ] core: successfully mounted backend: type=system path=sys/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547337 [INFO ] core: successfully mounted backend: type=identity path=identity/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547344 [INFO ] core: successfully mounted backend: type=cubbyhole path=cubbyhole/
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547790 [INFO ] expiration: restoring leases
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.547843 [INFO ] rollback: starting rollback manager
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.548016 [INFO ] expiration: lease restore complete
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.548022 [INFO ] identity: entities restored
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.548030 [INFO ] identity: groups restored
+[36mvault_1_24ca43299a6b |[0m 2020/11/19 21:46:11.548036 [INFO ] core: post-unseal setup complete
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestAccount_ListFetchCreateDelete
+[35mform3sdk_1_bf75a9878175 |[0m I want to create 10 accounts...
+[35mform3sdk_1_bf75a9878175 |[0m 0: Creating account d6f401e0-dd09-5519-b6b0-397979938b17...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    7.930458ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    7.952531ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m Fetching account d6f401e0-dd09-5519-b6b0-397979938b17, checking all properties are correctly set...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     492.235µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     509.168µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 1: Creating account 8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |     1.76499ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.778514ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 2: Creating account 36611478-5801-27f8-bfb1-a964cbc34e71...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.904711ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.919107ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 3: Creating account 1a6d0e00-fd39-a251-7cc4-1530cfbb1c63...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |     1.95062ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.967562ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 4: Creating account 51046731-20ac-bebb-6406-6b95f4987e07...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.769469ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.784979ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 5: Creating account 3c438676-b7c3-87af-e27e-a4acf3cdc1b3...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.879537ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.895686ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 6: Creating account 788f5200-2db3-c77b-c72f-f6346a0e8fdb...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.863236ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.877665ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 7: Creating account a0be524a-5db0-c2a7-4f49-f7f302b32f94...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.911268ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.926903ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 8: Creating account c93a063d-dc62-9fa5-68f4-79ac18a219e6...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |     1.75272ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    1.768415ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 9: Creating account 3872d0bf-0b9e-e85b-a313-0e653ba81ead...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    2.294808ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 201 |    2.313683ms |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m I want to retrive all accounts page by page, 2 account per page
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 0 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |    1.063979ms |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |    1.079285ms |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Got account d6f401e0-dd09-5519-b6b0-397979938b17 
+[35mform3sdk_1_bf75a9878175 |[0m Got account 8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1 
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned 2 accounts
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 1 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |      519.91µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=1&page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     535.334µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=1&page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Got account 36611478-5801-27f8-bfb1-a964cbc34e71 
+[35mform3sdk_1_bf75a9878175 |[0m Got account 1a6d0e00-fd39-a251-7cc4-1530cfbb1c63 
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned 2 accounts
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 2 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |      559.38µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=2&page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     577.692µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=2&page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Got account 51046731-20ac-bebb-6406-6b95f4987e07 
+[35mform3sdk_1_bf75a9878175 |[0m Got account 3c438676-b7c3-87af-e27e-a4acf3cdc1b3 
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned 2 accounts
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 3 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     508.346µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=3&page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     523.244µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=3&page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Got account 788f5200-2db3-c77b-c72f-f6346a0e8fdb 
+[35mform3sdk_1_bf75a9878175 |[0m Got account a0be524a-5db0-c2a7-4f49-f7f302b32f94 
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned 2 accounts
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 4 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     554.648µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=4&page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |      571.13µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=4&page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Got account c93a063d-dc62-9fa5-68f4-79ac18a219e6 
+[35mform3sdk_1_bf75a9878175 |[0m Got account 3872d0bf-0b9e-e85b-a313-0e653ba81ead 
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned 2 accounts
+[35mform3sdk_1_bf75a9878175 |[0m Retrieving Page 5 of 2 accounts...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     387.584µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=5&page%5Bsize%5D=2
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     405.475µs |      172.20.0.5 | GET      /v1/organisation/accounts?page%5Bnumber%5D=5&page%5Bsize%5D=2
+[35mform3sdk_1_bf75a9878175 |[0m Account.List returned no accounts
+[35mform3sdk_1_bf75a9878175 |[0m Account.List retrieved  10 accounts
+[35mform3sdk_1_bf75a9878175 |[0m I want to retrive all accounts in one request
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     890.631µs |      172.20.0.5 | GET      /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     905.109µs |      172.20.0.5 | GET      /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m 10 accounts retrieved
+[35mform3sdk_1_bf75a9878175 |[0m I check that the number of accounts retrived in both operations is the same
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m I want to delete all accounts
+[35mform3sdk_1_bf75a9878175 |[0m 1: Deleting account d6f401e0-dd09-5519-b6b0-397979938b17...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     391.758µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     406.582µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.856345ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.871521ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.741Z" level=info message="record d6f401e0-dd09-5519-b6b0-397979938b17 does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     446.777µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |      463.52µs |      172.20.0.5 | GET      /v1/organisation/accounts/d6f401e0-dd09-5519-b6b0-397979938b17
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 2: Deleting account 8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     410.774µs |      172.20.0.5 | GET      /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     426.555µs |      172.20.0.5 | GET      /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.656542ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.672283ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.744Z" level=info message="record 8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1 does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     360.473µs |      172.20.0.5 | GET      /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     370.813µs |      172.20.0.5 | GET      /v1/organisation/accounts/8d5b9f83-ed54-02ca-ca8f-9cfff96bc0e1
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 3: Deleting account 36611478-5801-27f8-bfb1-a964cbc34e71...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     407.986µs |      172.20.0.5 | GET      /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     428.794µs |      172.20.0.5 | GET      /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.703389ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.719451ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.747Z" level=info message="record 36611478-5801-27f8-bfb1-a964cbc34e71 does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     325.189µs |      172.20.0.5 | GET      /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     334.065µs |      172.20.0.5 | GET      /v1/organisation/accounts/36611478-5801-27f8-bfb1-a964cbc34e71
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 4: Deleting account 1a6d0e00-fd39-a251-7cc4-1530cfbb1c63...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |      386.38µs |      172.20.0.5 | GET      /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     399.663µs |      172.20.0.5 | GET      /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.683593ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.697518ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.750Z" level=info message="record 1a6d0e00-fd39-a251-7cc4-1530cfbb1c63 does not exist" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 5: Deleting account 51046731-20ac-bebb-6406-6b95f4987e07...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     336.586µs |      172.20.0.5 | GET      /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     344.451µs |      172.20.0.5 | GET      /v1/organisation/accounts/1a6d0e00-fd39-a251-7cc4-1530cfbb1c63
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     423.693µs |      172.20.0.5 | GET      /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     440.602µs |      172.20.0.5 | GET      /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.810336ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.825674ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.754Z" level=info message="record 51046731-20ac-bebb-6406-6b95f4987e07 does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     334.098µs |      172.20.0.5 | GET      /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     342.864µs |      172.20.0.5 | GET      /v1/organisation/accounts/51046731-20ac-bebb-6406-6b95f4987e07
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 6: Deleting account 3c438676-b7c3-87af-e27e-a4acf3cdc1b3...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     385.945µs |      172.20.0.5 | GET      /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     399.201µs |      172.20.0.5 | GET      /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.700148ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.715622ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     357.103µs |      172.20.0.5 | GET      /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     372.754µs |      172.20.0.5 | GET      /v1/organisation/accounts/3c438676-b7c3-87af-e27e-a4acf3cdc1b3
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.757Z" level=info message="record 3c438676-b7c3-87af-e27e-a4acf3cdc1b3 does not exist" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 7: Deleting account 788f5200-2db3-c77b-c72f-f6346a0e8fdb...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     408.235µs |      172.20.0.5 | GET      /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     425.527µs |      172.20.0.5 | GET      /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.611494ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.623907ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     301.548µs |      172.20.0.5 | GET      /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |      309.06µs |      172.20.0.5 | GET      /v1/organisation/accounts/788f5200-2db3-c77b-c72f-f6346a0e8fdb
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.760Z" level=info message="record 788f5200-2db3-c77b-c72f-f6346a0e8fdb does not exist" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 8: Deleting account a0be524a-5db0-c2a7-4f49-f7f302b32f94...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     397.122µs |      172.20.0.5 | GET      /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     413.733µs |      172.20.0.5 | GET      /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.687246ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.702347ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.763Z" level=info message="record a0be524a-5db0-c2a7-4f49-f7f302b32f94 does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     368.889µs |      172.20.0.5 | GET      /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     378.858µs |      172.20.0.5 | GET      /v1/organisation/accounts/a0be524a-5db0-c2a7-4f49-f7f302b32f94
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 9: Deleting account c93a063d-dc62-9fa5-68f4-79ac18a219e6...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     400.606µs |      172.20.0.5 | GET      /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |      414.72µs |      172.20.0.5 | GET      /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |     1.54992ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.563351ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6?version=0
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.767Z" level=info message="record c93a063d-dc62-9fa5-68f4-79ac18a219e6 does not exist" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m 10: Deleting account 3872d0bf-0b9e-e85b-a313-0e653ba81ead...
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     334.259µs |      172.20.0.5 | GET      /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     342.158µs |      172.20.0.5 | GET      /v1/organisation/accounts/c93a063d-dc62-9fa5-68f4-79ac18a219e6
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     476.901µs |      172.20.0.5 | GET      /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     493.822µs |      172.20.0.5 | GET      /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.664187ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 204 |    1.679102ms |      172.20.0.5 | DELETE   /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     354.089µs |      172.20.0.5 | GET      /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 404 |     365.783µs |      172.20.0.5 | GET      /v1/organisation/accounts/3872d0bf-0b9e-e85b-a313-0e653ba81ead
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m I want to check that there is no accounts left
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.770Z" level=info message="record 3872d0bf-0b9e-e85b-a313-0e653ba81ead does not exist" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     446.696µs |      172.20.0.5 | GET      /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 200 |     461.554µs |      172.20.0.5 | GET      /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestAccount_ListFetchCreateDelete (0.07s)
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.771Z" level=info message="validation failure list:\nvalidation failure list:\nid in body is required" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     128.117µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     136.965µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestEmptyAccountId
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: empty account id
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.771Z" level=info message="validation failure list:\nvalidation failure list:\norganisation_id in body is required" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestEmptyAccountId (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestEmptyOperationId
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: empty organization id
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestEmptyOperationId (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestEmptyAttributesList
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: empty attributes list
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     105.528µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     124.302µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestEmptyAttributesList (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidId
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.772Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\naccount_classification in body should be one of [Personal Business]\ncountry in body should match '^[A-Z]{2}$'" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid id
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     154.423µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     171.707µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidId (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidOperationId
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: organization id
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidOperationId (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidCountry
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid country
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.772Z" level=info message="validation failure list:\nvalidation failure list:\nid in body must be of type uuid: \"x\"" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidCountry (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidBaseCurrency
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid base currency
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidBaseCurrency (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidIban
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid IBAN
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidIban (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidBic
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid BIC
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidBic (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestCreate_BadRequestInvalidAccountClassification
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     109.254µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     120.693µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m Test: Create: bad request: invalid account classification
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestCreate_BadRequestInvalidAccountClassification (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestFetch_NotExistentAccount
+[35mform3sdk_1_bf75a9878175 |[0m Test: Fetch: bad request: account does not exist
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.773Z" level=info message="validation failure list:\nvalidation failure list:\norganisation_id in body must be of type uuid: \"x\"" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |       89.87µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     103.784µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestFetch_NotExistentAccount (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestDelete_NotExistentAccount
+[35mform3sdk_1_bf75a9878175 |[0m Test: Delete: bad request: account does not exist
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.773Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\ncountry in body should match '^[A-Z]{2}$'" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |      94.093µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     107.181µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.774Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\nbase_currency in body should match '^[A-Z]{3}$'\ncountry in body should match '^[A-Z]{2}$'" service_name=interview_accountapi stack=
+[35mform3sdk_1_bf75a9878175 |[0m OK
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestDelete_NotExistentAccount (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestAccountService_Create
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestAccountService_Create (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestAccountService_Fetch
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     146.245µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     159.298µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.774Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\nbase_currency in body should match '^[A-Z]{3}$'\ncountry in body should match '^[A-Z]{2}$'\niban in body should match '^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$'" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     112.501µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     120.851µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestAccountService_Fetch (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestAccountService_List_NoPages
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.775Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\nbase_currency in body should match '^[A-Z]{3}$'\nbic in body should match '^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$'\ncountry in body should match '^[A-Z]{2}$'\niban in body should match '^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$'" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     105.188µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     115.192µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestAccountService_List_NoPages (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m === RUN   TestActiveService_Delete
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.775Z" level=info message="validation failure list:\nvalidation failure list:\nvalidation failure list:\naccount_classification in body should be one of [Personal Business]\nbase_currency in body should match '^[A-Z]{3}$'\nbic in body should match '^([A-Z]{6}[A-Z0-9]{2}|[A-Z]{6}[A-Z0-9]{5})$'\ncountry in body should match '^[A-Z]{2}$'\niban in body should match '^[A-Z]{2}[0-9]{2}[A-Z0-9]{0,64}$'" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     133.147µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |     145.687µs |      172.20.0.5 | POST     /v1/organisation/accounts
+[35mform3sdk_1_bf75a9878175 |[0m --- PASS: TestActiveService_Delete (0.00s)
+[35mform3sdk_1_bf75a9878175 |[0m PASS
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.775Z" level=info message="id is not a valid uuid" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |      29.159µs |      172.20.0.5 | GET      /v1/organisation/accounts/d91afcdb-xxxx-4185-b23d-71c98eaab815
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |      43.579µs |      172.20.0.5 | GET      /v1/organisation/accounts/d91afcdb-xxxx-4185-b23d-71c98eaab815
+[35mform3sdk_1_bf75a9878175 |[0m ok  	go/form3/form3	0.082s
+[32maccountapi_1_7225c4504914 |[0m @timestamp="2020-11-19T21:46:12.776Z" level=info message="id is not a valid uuid" service_name=interview_accountapi stack=
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |      24.759µs |      172.20.0.5 | DELETE   /v1/organisation/accounts/d91afcdb-xxxx-4185-b23d-71c98eaab815?version=0
+[32maccountapi_1_7225c4504914 |[0m [GIN] 2020/11/19 - 21:46:12 | 400 |      36.118µs |      172.20.0.5 | DELETE   /v1/organisation/accounts/d91afcdb-xxxx-4185-b23d-71c98eaab815?version=0
+[35minterview-accountapi_form3sdk_1_bf75a9878175 exited with code 0
+[0mGracefully stopping... (press Ctrl+C again to force)
