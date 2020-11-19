@@ -127,3 +127,10 @@ See [README](interview-accountapi/tests/README.md).
 ## Author
 
 Valeriya Slovikovskaya, vslovik@gmail.com.
+
+![test screen 1](https://github.com/vslovik/form3/blob/main/test_screens_1.png)
+![test screen 2](https://github.com/vslovik/form3/blob/main/test_screens_2.png)
+![test screen 3](https://github.com/vslovik/form3/blob/main/test_screens_3.png)
+![test screen 4](https://github.com/vslovik/form3/blob/main/test_screens_4.png)
+
+
