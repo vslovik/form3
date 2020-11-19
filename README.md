@@ -84,16 +84,19 @@ for {
 
 #### To run all tests in the form3 package: integration `integration_test.go` and unit tests `operations_test.go`, run
 
+    $ cd interview-accountapi
     $ go test -v
     
 with coverage:
 
+    $ cd interview-accountapi
     $ go test -v --cover
     $ go test -coverprofile=coverage.out
     $ go tool cover -html=coverage.out
     
 in docker-container:
    
+    $ cd interview-accountapi
     $ docker-compose up
     
 NOTE: BaseUrl is set in `client.go`:
@@ -107,6 +110,7 @@ in docker container
 #### To run separated integration tests `tests/integration/accounts_test.go`
 Make repository public and
 
+    $ cd interview-accountapi
     $ go get -t github.com/vslovik/form3/form3
     $ cd tests 
     $ go test -v -tags=integration ./integration
@@ -114,12 +118,12 @@ Make repository public and
 See [README](interview-accountapi/tests/README.md).
     
 #### To run Form3 SDK usage examples
-Make repository public and
 
+    $ cd interview-accountapi
     $ go get -t github.com/vslovik/form3/form3
     $ cd examples/accounts
     $ go run main.go
 
 ## Author
 
-Valeriya Slovikovskaya, vslovik@gmail.com (almost new to GoLang).
+Valeriya Slovikovskaya, vslovik@gmail.com.
