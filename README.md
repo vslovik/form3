@@ -4,6 +4,8 @@ form3 is a Go client library for accessing the Form3 API.
 
 ## Usage ##
 ```go
+package main
+
 import "github.com/vslovik/form3/form3"	
 ```
 
@@ -102,26 +104,29 @@ in docker-container:
 NOTE: BaseUrl is set in `client.go`:
 
 ```go
+package form3
+
 const defaultBaseURL = "http://localhost:8080/"
 ```
 It should be `http://localhost:8080/` when running test on the host machine and `http://accountapi:8080/` to run them 
 in docker container
 
 #### To run separated integration tests `tests/integration/accounts_test.go`
-Make repository public and
+Run fake form3 api with docker-compose, it will be accessible on http://localhost:8080
+In form3/client.go set defaultBaseURL to http://loacalhost:8080/, then
 
-    $ cd interview-accountapi
+    $ cd interview-accountapi/tests
     $ go get -t github.com/vslovik/form3/form3
-    $ cd tests 
     $ go test -v -tags=integration ./integration
 
 See [README](interview-accountapi/tests/README.md).
     
 #### To run Form3 SDK usage examples
+Run fake form3 api with docker-compose, it will be accessible on http://localhost:8080
+In form3/client.go set defaultBaseURL to http://loacalhost:8080/, then
 
-    $ cd interview-accountapi
+    $ cd interview-accountapi/examples/accounts
     $ go get -t github.com/vslovik/form3/form3
-    $ cd examples/accounts
     $ go run main.go
 
 ## Author
