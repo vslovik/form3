@@ -111,7 +111,7 @@ Make repository public and
     $ cd tests 
     $ go test -v -tags=integration ./integration
 
-See [README](tests/README.md).
+See [README](interview-accountapi/tests/README.md).
     
 #### To run Form3 SDK usage examples
 Make repository public and
